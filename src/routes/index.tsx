@@ -123,114 +123,77 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   );
 }
 
-const longForm = [
-  {
-    title: "Commercial Ad Production",
-    desc: "Full production — shoot, edit, color grade & deliver.",
-    tag: "Cinematic Edit",
-    duration: "12:34",
-    thumb: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-    href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  },
-  {
-    title: "Product Explainer — Motion Graphics",
-    desc: "Animated product video with a sleek, modern style.",
-    tag: "Motion Graphics",
-    duration: "08:45",
-    thumb: "https://img.youtube.com/vi/jNQXAC9IVRw/hqdefault.jpg",
-    href: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
-  },
-  {
-    title: "Short Documentary",
-    desc: "Cinematic storytelling with professional grade footage.",
-    tag: "Documentary",
-    duration: "15:20",
-    thumb: "https://img.youtube.com/vi/9bZkp7q19f0/maxresdefault.jpg",
-    href: "https://www.youtube.com/watch?v=9bZkp7q19f0",
-  },
-  {
-    title: "Music Video — Visual Effects",
-    desc: "Directed and edited with innovative VFX and color work.",
-    tag: "VFX",
-    duration: "04:42",
-    thumb: "https://img.youtube.com/vi/kJQP7kiw5Fk/maxresdefault.jpg",
-    href: "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
-  },
-  {
-    title: "Editing Masterclass Tutorial",
-    desc: "Comprehensive course on professional editing workflow.",
-    tag: "Tutorial",
-    duration: "20:15",
-    thumb: "https://img.youtube.com/vi/RgKAFK5djSk/maxresdefault.jpg",
-    href: "https://www.youtube.com/watch?v=RgKAFK5djSk",
-  },
-  {
-    title: "Brand Story Film",
-    desc: "Emotive brand film with bespoke color and sound.",
-    tag: "Brand Film",
-    duration: "06:18",
-    thumb: "https://img.youtube.com/vi/2Vv-BfVoq4g/hqdefault.jpg",
-    href: "https://www.youtube.com/watch?v=2Vv-BfVoq4g",
-  },
+const placeholderThumb = "https://cdn.pixabay.com/photo/2021/08/04/13/06/software-developer-6521720_1280.jpg";
+
+const adsVideos = [
+  { title: "Ad Campaign 1", desc: "Commercial video editing", tag: "Ads", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
+  { title: "Ad Campaign 2", desc: "Commercial video editing", tag: "Ads", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
+  { title: "Ad Campaign 3", desc: "Commercial video editing", tag: "Ads", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
 ];
 
-const skills = [
-  {
-    icon: Scissors,
-    title: "Video Editing",
-    desc: "Professional editing for short & long-form content.",
-    tags: ["Premiere Pro", "Final Cut Pro", "CapCut"],
-  },
-  {
-    icon: Sparkles,
-    title: "Motion Graphics",
-    desc: "Eye-catching animations and visual effects.",
-    tags: ["After Effects", "Cinema 4D", "Blender"],
-  },
-  {
-    icon: Palette,
-    title: "Color Grading",
-    desc: "Cinematic color correction and look development.",
-    tags: ["DaVinci Resolve", "Lumetri", "LUTs"],
-  },
-  {
-    icon: Headphones,
-    title: "Sound Design",
-    desc: "Professional audio mixing and SFX layering.",
-    tags: ["Adobe Audition", "SFX", "Mixing"],
-  },
-  {
-    icon: PenTool,
-    title: "Graphic Design",
-    desc: "Thumbnails, posters & visual identity.",
-    tags: ["Photoshop", "Illustrator", "Canva"],
-  },
-  {
-    icon: Lightbulb,
-    title: "Content Strategy",
-    desc: "Planning & producing content that drives results.",
-    tags: ["YouTube", "TikTok", "Instagram"],
-  },
+const arabicVideos = [
+  { title: "Arabic Content 1", desc: "Arabic voiceover & editing", tag: "Arabic", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
+  { title: "Arabic Content 2", desc: "Arabic voiceover & editing", tag: "Arabic", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
+  { title: "Arabic Content 3", desc: "Arabic voiceover & editing", tag: "Arabic", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
 ];
 
-const featuredVideos = [
-  {
-    title: "Professional Cinematic Montage",
-    desc: "Full production — Editing, Color Grading & VFX",
-    ar: "مونتاج سينمائي احترافي",
-    tag: "Cinematic Edit",
-    videoSrc:
-      "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4",
-  },
-  {
-    title: "Creative Visual Content",
-    desc: "Motion Graphics & Visual Effects",
-    ar: "محتوى إبداعي بصري",
-    tag: "Creative Content",
-    videoSrc:
-      "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4",
-  },
+const carVideos = [
+  { title: "Automotive 1", desc: "Cinematic car videography", tag: "Cars", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
+  { title: "Automotive 2", desc: "Cinematic car videography", tag: "Cars", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
+  { title: "Automotive 3", desc: "Cinematic car videography", tag: "Cars", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
 ];
+
+const englishVideos = [
+  { title: "English Content 1", desc: "English voiceover & editing", tag: "English", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
+  { title: "English Content 2", desc: "English voiceover & editing", tag: "English", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
+  { title: "English Content 3", desc: "English voiceover & editing", tag: "English", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
+];
+
+function VideoSection({ id, title, subtitle, icon: Icon, videos, onPlay }: any) {
+  return (
+    <section id={id} className="relative py-24">
+      <div className="section-divider" />
+      <div className="mx-auto max-w-7xl px-6 pt-12">
+        <Reveal className="text-center mb-14">
+          <div className="chip mb-4 inline-flex">
+            <Icon className="h-3.5 w-3.5" />
+            <span>{id.charAt(0).toUpperCase() + id.slice(1)}</span>
+          </div>
+          <h2 className="font-display text-3xl md:text-5xl font-bold mb-3">
+            {title} <span className="gradient-text">Projects</span>
+          </h2>
+          <p className="max-w-xl mx-auto text-muted-foreground">{subtitle}</p>
+        </Reveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          {videos.map((v: any, i: number) => (
+            <Reveal key={i} delay={i * 80}>
+              <div
+                onClick={() => onPlay(v.videoSrc)}
+                className="glass-card video-card block overflow-hidden cursor-pointer"
+              >
+                <div className="relative aspect-video overflow-hidden">
+                  <img src={v.thumb} alt={v.title} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                  <div className="play-overlay">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
+                      <Play className="h-5 w-5 fill-current text-primary-foreground" />
+                    </div>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <div className="text-[11px] uppercase tracking-widest text-glow mb-2">{v.tag}</div>
+                  <h3 className="font-display text-lg font-semibold mb-1.5">{v.title}</h3>
+                  <p className="text-sm text-muted-foreground">{v.desc}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function PortfolioPage() {
   const typed = useTypewriter(typewriterWords);
@@ -252,26 +215,6 @@ function PortfolioPage() {
     }
     setTimeout(() => setModalSrc(""), 400);
   }, []);
-
-  const toggleFeaturedPlay = useCallback(
-    (idx: number) => {
-      const vid = featuredRefs.current[idx];
-      if (!vid) return;
-      if (playingIdx === idx) {
-        vid.pause();
-        setPlayingIdx(null);
-      } else {
-        // Pause any other playing video
-        if (playingIdx !== null && featuredRefs.current[playingIdx]) {
-          featuredRefs.current[playingIdx]!.pause();
-        }
-        vid.muted = false;
-        vid.play();
-        setPlayingIdx(idx);
-      }
-    },
-    [playingIdx],
-  );
 
   // Smooth scroll for anchor links
   useEffect(() => {
@@ -430,170 +373,11 @@ function PortfolioPage() {
         </div>
       </section>
 
-      {/* ============ FEATURED ============ */}
-      <section id="featured" className="relative py-24">
-        <div className="section-divider" />
-        <div className="mx-auto max-w-7xl px-6 pt-12">
-          <Reveal className="text-center mb-14">
-            <div className="chip mb-4 inline-flex">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>Featured Work</span>
-            </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold mb-3">
-              Top <span className="gradient-text">Projects</span>
-            </h2>
-            <p className="max-w-xl mx-auto text-muted-foreground">
-              A curated selection of my most impactful work.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {featuredVideos.map((f, i) => (
-              <Reveal key={i} delay={i * 120}>
-                <div className="glass-card video-card overflow-hidden">
-                  <div className="relative aspect-video overflow-hidden">
-                    <video
-                      ref={(el) => { featuredRefs.current[i] = el; }}
-                      src={f.videoSrc}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="h-full w-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
-                    <button
-                      type="button"
-                      onClick={() => toggleFeaturedPlay(i)}
-                      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex h-16 w-16 items-center justify-center rounded-full bg-primary/85 backdrop-blur-sm transition-all duration-400 hover:scale-115"
-                      style={{
-                        boxShadow: "0 0 40px oklch(0.68 0.21 250 / 0.6)",
-                      }}
-                    >
-                      {playingIdx === i ? (
-                        <Pause className="h-7 w-7 fill-current text-primary-foreground" />
-                      ) : (
-                        <Play className="h-7 w-7 fill-current text-primary-foreground" />
-                      )}
-                    </button>
-                    <div className="absolute bottom-4 left-4">
-                      <span className="chip text-xs">{f.tag}</span>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-display text-xl font-semibold mb-1.5">{f.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-1">{f.desc}</p>
-                    <p className="font-arabic text-xs text-glow" dir="rtl">
-                      {f.ar}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============ LONG-FORM ============ */}
-      <section id="longform" className="relative py-24">
-        <div className="section-divider" />
-        <div className="mx-auto max-w-7xl px-6 pt-12">
-          <Reveal className="text-center mb-14">
-            <div className="chip mb-4 inline-flex">
-              <Youtube className="h-3.5 w-3.5" />
-              <span>Long-Form Content</span>
-            </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold mb-3">
-              Full <span className="gradient-text">Videos</span>
-            </h2>
-            <p className="max-w-xl mx-auto text-muted-foreground">
-              In-depth content that showcases the depth of my craft.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {longForm.map((v, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <a
-                  href={v.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass-card video-card block overflow-hidden"
-                >
-                  <div className="relative aspect-video overflow-hidden">
-                    <img
-                      src={v.thumb}
-                      alt={v.title}
-                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-110"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-                    <span className="absolute top-3 left-3 chip text-[11px]">{v.duration}</span>
-                    <div className="play-overlay">
-                      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
-                        <Play className="h-5 w-5 fill-current text-primary-foreground" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <div className="text-[11px] uppercase tracking-widest text-glow mb-2">
-                      {v.tag}
-                    </div>
-                    <h3 className="font-display text-lg font-semibold mb-1.5">{v.title}</h3>
-                    <p className="text-sm text-muted-foreground">{v.desc}</p>
-                  </div>
-                </a>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============ SKILLS ============ */}
-      <section id="skills" className="relative py-24">
-        <div className="section-divider" />
-        <div className="mx-auto max-w-7xl px-6 pt-12">
-          <Reveal className="text-center mb-14">
-            <div className="chip mb-4 inline-flex">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>Tools &amp; Skills</span>
-            </div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold mb-3">
-              Creative <span className="gradient-text">Arsenal</span>
-            </h2>
-            <p className="max-w-xl mx-auto text-muted-foreground">
-              Mastering industry-standard tools to deliver exceptional results.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skills.map((s, i) => {
-              const Icon = s.icon;
-              return (
-                <Reveal key={s.title} delay={i * 70}>
-                  <div className="glass-card p-7 h-full">
-                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/15 text-glow shadow-[inset_0_0_20px_oklch(0.68_0.21_250/0.2)]">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="font-display text-lg font-semibold mb-2">{s.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-5">{s.desc}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {s.tags.map((t) => (
-                        <span
-                          key={t}
-                          className="rounded-full border border-border bg-secondary/40 px-3 py-1 text-xs text-muted-foreground"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* ============ NEW SECTIONS ============ */}
+      <VideoSection id="ads" title="Ads" subtitle="Commercial and brand video editing." icon={Zap} videos={adsVideos} onPlay={openModal} />
+      <VideoSection id="arabic" title="Arabic" subtitle="Content crafted for Arabic-speaking audiences." icon={Sparkles} videos={arabicVideos} onPlay={openModal} />
+      <VideoSection id="cars" title="Cars" subtitle="Cinematic automotive videography and editing." icon={Play} videos={carVideos} onPlay={openModal} />
+      <VideoSection id="english" title="English" subtitle="Professional English voiceovers and content." icon={Youtube} videos={englishVideos} onPlay={openModal} />
 
       {/* ============ CONTACT ============ */}
       <section id="contact" className="relative py-24">
@@ -752,9 +536,10 @@ function Navbar() {
   const links = [
     { href: "#hero", label: "Home" },
     { href: "#shorts", label: "Reels" },
-    { href: "#featured", label: "Featured" },
-    { href: "#longform", label: "Videos" },
-    { href: "#skills", label: "Skills" },
+    { href: "#ads", label: "Ads" },
+    { href: "#arabic", label: "Arabic" },
+    { href: "#cars", label: "Cars" },
+    { href: "#english", label: "English" },
   ];
 
   return (

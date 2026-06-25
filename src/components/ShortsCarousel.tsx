@@ -44,6 +44,7 @@ export function ShortsCarousel() {
               key={originalIndex}
               onClick={() => setActiveIndex(originalIndex)}
               className={`shorts-glass group cursor-pointer ${isFeatured ? "is-featured" : ""}`}
+              style={{ background: slotColors[slotIndex] }}
               animate={{
                 rotateY: rotate,
                 rotateZ: rotateZ,
@@ -73,15 +74,6 @@ export function ShortsCarousel() {
                 }}
               />
 
-              {/* Solid gradient overlay for inactive cards to exactly match the mockup rainbow */}
-              <motion.div
-                className="absolute inset-0 z-10"
-                initial={false}
-                animate={{ opacity: isFeatured ? 0 : 1 }}
-                style={{ background: slotColors[slotIndex] }}
-                transition={{ duration: 0.3 }}
-              />
-
               <div className="shorts-glass-overlay z-10" />
 
               {isFeatured && (
@@ -94,16 +86,10 @@ export function ShortsCarousel() {
                 </div>
               )}
 
-              {/* Only show text on the active center card */}
-              <motion.div 
-                className="shorts-glass-meta z-20"
-                initial={false}
-                animate={{ opacity: isFeatured ? 1 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
+              <div className="shorts-glass-meta z-20">
                 <div className="shorts-glass-label">{s.label}</div>
                 <div className="shorts-glass-title">{s.title}</div>
-              </motion.div>
+              </div>
             </motion.div>
           );
         })}

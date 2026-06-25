@@ -123,31 +123,7 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   );
 }
 
-const placeholderThumb = "https://cdn.pixabay.com/photo/2021/08/04/13/06/software-developer-6521720_1280.jpg";
-
-const adsVideos = [
-  { title: "Ad Campaign 1", desc: "Commercial video editing", tag: "Ads", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-  { title: "Ad Campaign 2", desc: "Commercial video editing", tag: "Ads", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-  { title: "Ad Campaign 3", desc: "Commercial video editing", tag: "Ads", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-];
-
-const arabicVideos = [
-  { title: "Arabic Content 1", desc: "Arabic voiceover & editing", tag: "Arabic", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-  { title: "Arabic Content 2", desc: "Arabic voiceover & editing", tag: "Arabic", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-  { title: "Arabic Content 3", desc: "Arabic voiceover & editing", tag: "Arabic", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-];
-
-const carVideos = [
-  { title: "Automotive 1", desc: "Cinematic car videography", tag: "Cars", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-  { title: "Automotive 2", desc: "Cinematic car videography", tag: "Cars", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-  { title: "Automotive 3", desc: "Cinematic car videography", tag: "Cars", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-];
-
-const englishVideos = [
-  { title: "English Content 1", desc: "English voiceover & editing", tag: "English", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-  { title: "English Content 2", desc: "English voiceover & editing", tag: "English", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-  { title: "English Content 3", desc: "English voiceover & editing", tag: "English", thumb: placeholderThumb, videoSrc: "https://cdn.coverr.co/videos/coverr-a-girl-using-her-phone-on-the-couch-4615/1080p.mp4" },
-];
+import { adsVideos, arabicVideos, carVideos, englishVideos } from "@/data/media";
 
 function VideoSection({ id, title, subtitle, icon: Icon, videos, onPlay }: any) {
   return (

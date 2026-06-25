@@ -64,7 +64,7 @@ export function ShortsCarousel() {
                 loop
                 muted
                 playsInline
-                preload="metadata"
+                preload="auto"
                 className="shorts-glass-video"
                 ref={(el) => {
                   if (el) {
@@ -74,7 +74,7 @@ export function ShortsCarousel() {
                 }}
               />
 
-              <div className="shorts-glass-overlay z-10" />
+              <div className="shorts-glass-overlay" />
 
               {isFeatured && (
                 <div className="shorts-featured-badge">Featured</div>
@@ -86,7 +86,7 @@ export function ShortsCarousel() {
                 </div>
               )}
 
-              <div className="shorts-glass-meta z-20">
+              <div className="shorts-glass-meta">
                 <div className="shorts-glass-label">{s.label}</div>
                 <div className="shorts-glass-title">{s.title}</div>
               </div>

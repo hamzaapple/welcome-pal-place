@@ -286,7 +286,7 @@ function PortfolioPage() {
                 {[
                   { n: 50, suffix: "+", label: "Projects" },
                   { n: 30, suffix: "+", label: "Clients" },
-                  { n: 3, suffix: "y", label: "Experience" },
+                  { n: 1, suffix: "y", label: "Experience" },
                 ].map((s, i) => (
                   <div key={i} className="text-center md:text-left">
                     <div className="font-display text-3xl font-bold text-glow">

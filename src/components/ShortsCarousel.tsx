@@ -1,19 +1,9 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
 import { motion } from "motion/react";
+import { shortsList } from "@/data/media";
 
-const shortsData = [
-  { label: "Short", title: "Video -1-", src: "https://cdn.pixabay.com/video/2024/03/15/204306-924613396_large.mp4" },
-  { label: "Reel", title: "Video -2-", src: "https://cdn.pixabay.com/video/2023/10/05/183032-872065752_large.mp4" },
-  { label: "Short", title: "Video -3-", src: "https://cdn.pixabay.com/video/2022/11/30/141050-777832367_large.mp4" },
-  { label: "Reel", title: "Video -4-", src: "https://cdn.pixabay.com/video/2024/02/26/202298-916310403_large.mp4" },
-  { label: "Short", title: "Video -5-", src: "https://cdn.pixabay.com/video/2023/11/19/189813-885095773_large.mp4" },
-  { label: "Reel", title: "Video 1-1", src: "https://cdn.pixabay.com/video/2024/03/15/204306-924613396_large.mp4" },
-  { label: "Short", title: "Video R2", src: "https://cdn.pixabay.com/video/2023/10/05/183032-872065752_large.mp4" },
-  { label: "Reel", title: "Video Extra 1", src: "https://cdn.pixabay.com/video/2022/11/30/141050-777832367_large.mp4" },
-  { label: "Short", title: "Video Extra 2", src: "https://cdn.pixabay.com/video/2024/02/26/202298-916310403_large.mp4" },
-  { label: "Reel", title: "Video Extra 3", src: "https://cdn.pixabay.com/video/2023/11/19/189813-885095773_large.mp4" },
-];
+const shortsData = shortsList;
 
 export function ShortsCarousel() {
   const [activeIndex, setActiveIndex] = useState(2);

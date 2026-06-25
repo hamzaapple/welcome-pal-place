@@ -46,6 +46,7 @@ export function ShortsCarousel() {
             >
               <video
                 src={s.src}
+                poster={s.thumb}
                 autoPlay
                 loop
                 muted

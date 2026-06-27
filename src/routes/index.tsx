@@ -17,15 +17,17 @@ import {
   Youtube,
   ArrowDown,
   Rocket,
+  Facebook,
+  Link as LinkIcon,
 } from "lucide-react";
 
-import profileAsset from "@/assets/profile.jpeg.asset.json";
 import { Reveal } from "@/components/Reveal";
 import { ShortsCarousel } from "@/components/ShortsCarousel";
 import { ParticleCanvas } from "@/components/ParticleCanvas";
 import { CursorGlow } from "@/components/CursorGlow";
 import { BackToTop } from "@/components/BackToTop";
 import { VideoModal } from "@/components/VideoModal";
+import { SiteTour } from "@/components/SiteTour";
 
 export const Route = createFileRoute("/")(  {
   head: () => ({
@@ -41,7 +43,7 @@ export const Route = createFileRoute("/")(  {
         property: "og:description",
         content: "Cinematic editing, motion graphics & color grading.",
       },
-      { property: "og:image", content: profileAsset.url },
+      { property: "og:image", content: "/profile.jpeg" },
     ],
   }),
   component: PortfolioPage,
@@ -149,7 +151,7 @@ function VideoSection({ id, title, subtitle, icon: Icon, videos, onPlay }: any) 
                 className="glass-card video-card block overflow-hidden cursor-pointer"
               >
                 <div className="relative aspect-video overflow-hidden">
-                  <img src={v.thumb} alt={v.title} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" loading="lazy" />
+                  <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted playsInline />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                   <div className="play-overlay">
                     <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
@@ -213,7 +215,8 @@ function PortfolioPage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div className="relative min-h-screen selection:bg-primary/30 selection:text-primary-foreground font-body">
+      <SiteTour />
       {/* Global background: grid + radial glows */}
       <div className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-grid bg-grid-fade opacity-60" />
@@ -307,7 +310,7 @@ function PortfolioPage() {
                 <div className="aura-ring aura-ring-2" />
                 <div className="profile-ring relative h-full w-full">
                   <img
-                    src={profileAsset.url}
+                    src="/profile.jpeg"
                     alt="Nady Rabie — Video Editor"
                     className="h-full w-full rounded-full object-cover"
                     loading="eager"
@@ -350,10 +353,89 @@ function PortfolioPage() {
       </section>
 
       {/* ============ NEW SECTIONS ============ */}
-      <VideoSection id="ads" title="Ads" subtitle="Commercial and brand video editing." icon={Zap} videos={adsVideos} onPlay={openModal} />
-      <VideoSection id="arabic" title="Arabic" subtitle="Content crafted for Arabic-speaking audiences." icon={Sparkles} videos={arabicVideos} onPlay={openModal} />
-      <VideoSection id="cars" title="Cars" subtitle="Cinematic automotive videography and editing." icon={Play} videos={carVideos} onPlay={openModal} />
-      <VideoSection id="english" title="English" subtitle="Professional English voiceovers and content." icon={Youtube} videos={englishVideos} onPlay={openModal} />
+      <section className="relative py-24">
+        <div className="section-divider" />
+        <div className="mx-auto max-w-7xl px-6 pt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            
+            {/* Ads Section Half */}
+            <div id="ads" className="scroll-mt-24">
+              <Reveal className="text-center md:text-left mb-10">
+                <div className="chip mb-4 inline-flex">
+                  <Zap className="h-3.5 w-3.5" />
+                  <span>Ads</span>
+                </div>
+                <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">
+                  Ads <span className="gradient-text">Projects</span>
+                </h2>
+                <p className="max-w-md mx-auto md:mx-0 text-muted-foreground">Commercial and brand video editing.</p>
+              </Reveal>
+              <div className="grid grid-cols-1 gap-7">
+                {adsVideos.map((v: any, i: number) => (
+                  <Reveal key={`ads-${i}`} delay={i * 80}>
+                    <div onClick={() => openModal(v.videoSrc)} className="glass-card video-card block overflow-hidden cursor-pointer">
+                      <div className="relative aspect-video overflow-hidden">
+                        <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted playsInline />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                        <div className="play-overlay">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
+                            <Play className="h-5 w-5 fill-current text-primary-foreground" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-5">
+                        <div className="text-[11px] uppercase tracking-widest text-glow mb-2">{v.tag}</div>
+                        <h3 className="font-display text-lg font-semibold mb-1.5">{v.title}</h3>
+                        <p className="text-sm text-muted-foreground">{v.desc}</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+
+            {/* Cars Section Half */}
+            <div id="cars" className="scroll-mt-24">
+              <Reveal className="text-center md:text-left mb-10">
+                <div className="chip mb-4 inline-flex">
+                  <Play className="h-3.5 w-3.5" />
+                  <span>Cars</span>
+                </div>
+                <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">
+                  Car <span className="gradient-text">Editing</span>
+                </h2>
+                <p className="max-w-md mx-auto md:mx-0 text-muted-foreground">Cinematic automotive videography and editing.</p>
+              </Reveal>
+              <div className="grid grid-cols-1 gap-7">
+                {carVideos.map((v: any, i: number) => (
+                  <Reveal key={`car-${i}`} delay={i * 80}>
+                    <div onClick={() => openModal(v.videoSrc)} className="glass-card video-card block overflow-hidden cursor-pointer">
+                      <div className="relative aspect-video overflow-hidden">
+                        <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted playsInline />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                        <div className="play-overlay">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
+                            <Play className="h-5 w-5 fill-current text-primary-foreground" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-5">
+                        <div className="text-[11px] uppercase tracking-widest text-glow mb-2">{v.tag}</div>
+                        <h3 className="font-display text-lg font-semibold mb-1.5">{v.title}</h3>
+                        <p className="text-sm text-muted-foreground">{v.desc}</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <VideoSection id="arabic" title="Talking Head Arabic" subtitle="Content crafted for Arabic-speaking audiences." icon={Sparkles} videos={arabicVideos} onPlay={openModal} />
+      <VideoSection id="english" title="Talking Head English" subtitle="Professional English voiceovers and content." icon={Youtube} videos={englishVideos} onPlay={openModal} />
 
       {/* ============ CONTACT ============ */}
       <section id="contact" className="relative py-24">
@@ -381,7 +463,7 @@ function PortfolioPage() {
                 </p>
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
                   <a
-                    href="https://wa.me/9647700000000"
+                    href="https://api.whatsapp.com/send?phone=201552600131"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="cta-whatsapp"
@@ -391,15 +473,49 @@ function PortfolioPage() {
                     </svg>
                     WhatsApp
                   </a>
-                  <a href="mailto:nadi@example.com" className="btn-glow">
-                    <Mail className="h-5 w-5" />
-                    Email Me
-                  </a>
                   <a
-                    href="https://instagram.com/"
+                    href="https://www.tiktok.com/@nady_rabiee?is_from_webapp=1&sender_device=pc"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-ghost"
+                    className="cta-tiktok"
+                  >
+                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.11v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.73a8.19 8.19 0 004.76 1.52V6.79a4.84 4.84 0 01-1-.1z" />
+                    </svg>
+                    TikTok
+                  </a>
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61577821307721"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-facebook"
+                  >
+                    <Facebook className="h-5 w-5" />
+                    Facebook
+                  </a>
+                  <a
+                    href="https://www.youtube.com/channel/UCMmqcr782vji5sj3qzKBrYw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-youtube"
+                  >
+                    <Youtube className="h-5 w-5" />
+                    YouTube
+                  </a>
+                  <a
+                    href="https://linktr.ee/nadyrabie.creates"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-linktree"
+                  >
+                    <LinkIcon className="h-5 w-5" />
+                    Linktree
+                  </a>
+                  <a
+                    href="https://www.instagram.com/nady_rabiee?igsh=M2x6NjNrZmlhb3Z0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-instagram"
                   >
                     <Instagram className="h-5 w-5" />
                     Instagram
@@ -407,7 +523,7 @@ function PortfolioPage() {
                 </div>
                 <div className="flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
                   <span className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-glow" /> Iraq
+                    <MapPin className="h-4 w-4 text-glow" /> Egypt
                   </span>
                   <span className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-glow" /> Available Daily
@@ -435,7 +551,16 @@ function PortfolioPage() {
           </p>
           <div className="flex items-center gap-5">
             <a
-              href="https://instagram.com/"
+              href="https://linktr.ee/nadyrabie.creates"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Linktree"
+              className="text-muted-foreground transition-colors hover:text-glow"
+            >
+              <LinkIcon className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.instagram.com/nady_rabiee?igsh=M2x6NjNrZmlhb3Z0"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -444,7 +569,16 @@ function PortfolioPage() {
               <Instagram className="h-5 w-5" />
             </a>
             <a
-              href="https://youtube.com/"
+              href="https://www.facebook.com/profile.php?id=61577821307721"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="text-muted-foreground transition-colors hover:text-glow"
+            >
+              <Facebook className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UCMmqcr782vji5sj3qzKBrYw"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="YouTube"
@@ -453,7 +587,7 @@ function PortfolioPage() {
               <Youtube className="h-5 w-5" />
             </a>
             <a
-              href="https://tiktok.com/"
+              href="https://www.tiktok.com/@nady_rabiee?is_from_webapp=1&sender_device=pc"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="TikTok"
@@ -512,10 +646,10 @@ function Navbar() {
   const links = [
     { href: "#hero", label: "Home" },
     { href: "#shorts", label: "Reels" },
-    { href: "#ads", label: "Ads" },
-    { href: "#arabic", label: "Arabic" },
-    { href: "#cars", label: "Cars" },
-    { href: "#english", label: "English" },
+    { href: "#ads", label: "Ads Editing" },
+    { href: "#arabic", label: "Talking Head Arabic" },
+    { href: "#cars", label: "Car Editing" },
+    { href: "#english", label: "Talking Head English" },
   ];
 
   return (

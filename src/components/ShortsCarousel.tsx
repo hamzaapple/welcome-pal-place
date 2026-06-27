@@ -40,18 +40,45 @@ export function ShortsCarousel() {
 
           return (
             <motion.div
-              layout
               key={originalIndex}
               onClick={() => setActiveIndex(originalIndex)}
               className={`shorts-glass group cursor-pointer ${isFeatured ? "is-featured" : ""}`}
-              style={{ background: slotColors[slotIndex] }}
-              animate={{
+              style={{ 
+                background: slotColors[slotIndex],
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+              }}
+              initial={{
+                x: `calc(-50% + ${offset * 164}px)`,
+                y: "-50%",
                 rotateY: rotate,
                 rotateZ: rotateZ,
                 zIndex: z,
                 scale: Math.abs(offset) === 2 ? 0.85 : 1,
               }}
-              whileHover={{ scale: 1.04 }}
+              animate={{
+                x: `calc(-50% + ${offset * 164}px)`,
+                y: "-50%",
+                rotateY: rotate,
+                rotateZ: rotateZ,
+                zIndex: z,
+                scale: Math.abs(offset) === 2 ? 0.85 : 1,
+              }}
+              whileHover={{ 
+                x: `calc(-50% + ${offset * 164}px)`,
+                y: "-50%",
+                scale: 1.04,
+                rotateY: rotate,
+                rotateZ: rotateZ
+              }}
+              whileTap={{
+                x: `calc(-50% + ${offset * 164}px)`,
+                y: "-50%",
+                scale: 0.98,
+                rotateY: rotate,
+                rotateZ: rotateZ
+              }}
               transition={{
                 type: "spring",
                 stiffness: 260,
@@ -59,12 +86,11 @@ export function ShortsCarousel() {
               }}
             >
               <video
-                src={s.src}
-                poster={s.thumb}
+                src={s.src + "#t=0.1"}
                 loop
                 muted
                 playsInline
-                preload="auto"
+                preload="metadata"
                 className="shorts-glass-video"
                 ref={(el) => {
                   if (el) {

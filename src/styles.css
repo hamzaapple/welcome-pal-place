@@ -257,6 +257,106 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
   }
+  
+  .cta-tiktok {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.75rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    background: #000;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 242, 254, 0.1);
+    transition: all 0.35s ease;
+    border: none;
+    cursor: pointer;
+  }
+  .cta-tiktok:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(254, 9, 121, 0.3);
+  }
+
+  .cta-facebook {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.75rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    background: #1877F2;
+    box-shadow: 0 4px 14px rgba(24, 119, 242, 0.3);
+    transition: all 0.35s ease;
+    border: none;
+    cursor: pointer;
+  }
+  .cta-facebook:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(24, 119, 242, 0.5);
+  }
+
+  .cta-youtube {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.75rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    background: #FF0000;
+    box-shadow: 0 4px 14px rgba(255, 0, 0, 0.3);
+    transition: all 0.35s ease;
+    border: none;
+    cursor: pointer;
+  }
+  .cta-youtube:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 0, 0, 0.5);
+  }
+
+  .cta-linktree {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.75rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #000;
+    background: #43E660;
+    box-shadow: 0 4px 14px rgba(67, 230, 96, 0.3);
+    transition: all 0.35s ease;
+    border: none;
+    cursor: pointer;
+  }
+  .cta-linktree:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(67, 230, 96, 0.5);
+  }
+
+  .cta-instagram {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.75rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #fff;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    box-shadow: 0 4px 14px rgba(220, 39, 67, 0.3);
+    transition: all 0.35s ease;
+    border: none;
+    cursor: pointer;
+  }
+  .cta-instagram:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(220, 39, 67, 0.5);
+  }
 }
 
 /* ===== Animations ===== */

@@ -32,7 +32,7 @@ import { SiteTour } from "@/components/SiteTour";
 export const Route = createFileRoute("/")(  {
   head: () => ({
     meta: [
-      { title: "Nady Rabie | نادي ربيع — Video Editor & Content Creator" },
+      { title: "Nady Rabie — Video Editor & Content Creator" },
       {
         name: "description",
         content:
@@ -639,10 +639,10 @@ function Navbar() {
   const links = [
     { href: "#hero", label: "Home" },
     { href: "#shorts", label: "Reels" },
-    { href: "#ads", label: "Ads Editing" },
-    { href: "#arabic", label: "Talking Head Arabic" },
-    { href: "#cars", label: "Car Editing" },
-    { href: "#english", label: "Talking Head English" },
+    { href: "#english", label: "English" },
+    { href: "#arabic", label: "Arabic" },
+    { href: "#cars", label: "Cars" },
+    { href: "#ads", label: "Ads" },
   ];
 
   return (

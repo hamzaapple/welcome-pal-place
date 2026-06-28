@@ -544,55 +544,7 @@ function PortfolioPage() {
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Nady Rabie. All rights reserved.
           </p>
-          <div className="flex items-center gap-5">
-            <a
-              href="https://linktr.ee/nadyrabie.creates"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Linktree"
-              className="text-muted-foreground transition-colors hover:text-glow"
-            >
-              <LinkIcon className="h-5 w-5" />
-            </a>
-            <a
-              href="https://www.instagram.com/nady_rabiee?igsh=M2x6NjNrZmlhb3Z0"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="text-muted-foreground transition-colors hover:text-glow"
-            >
-              <Instagram className="h-5 w-5" />
-            </a>
-            <a
-              href="https://www.facebook.com/profile.php?id=61577821307721"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="text-muted-foreground transition-colors hover:text-glow"
-            >
-              <Facebook className="h-5 w-5" />
-            </a>
-            <a
-              href="https://www.youtube.com/channel/UCMmqcr782vji5sj3qzKBrYw"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-              className="text-muted-foreground transition-colors hover:text-glow"
-            >
-              <Youtube className="h-5 w-5" />
-            </a>
-            <a
-              href="https://www.tiktok.com/@nady_rabiee?is_from_webapp=1&sender_device=pc"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="TikTok"
-              className="text-muted-foreground transition-colors hover:text-glow"
-            >
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.11v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.73a8.19 8.19 0 004.76 1.52V6.79a4.84 4.84 0 01-1-.1z" />
-              </svg>
-            </a>
-          </div>
+
         </div>
         <div className="mx-auto mt-6 mb-4 flex flex-col items-center justify-center gap-3 px-6 md:flex-row">
           <p className="text-xs text-muted-foreground/70">

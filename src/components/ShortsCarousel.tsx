@@ -1,15 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Play } from "lucide-react";
 import { motion } from "motion/react";
 import { shortsList } from "@/data/media";
 
-const shortsData = shortsList;
+type Props = {
+  onPlay?: (src: string) => void;
+};
 
-export function ShortsCarousel() {
+export function ShortsCarousel({ onPlay }: Props) {
   const [activeIndex, setActiveIndex] = useState(2);
-  const n = shortsData.length;
+  const [isMobile, setIsMobile] = useState(false);
+  const n = shortsList.length;
 
-  // Reorder array so the activeIndex is always in the physical middle (slot 2)
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // For Desktop Fan
   const visibleIndices = [
     (activeIndex - 2 + n) % n,
     (activeIndex - 1 + n) % n,
@@ -18,30 +28,63 @@ export function ShortsCarousel() {
     (activeIndex + 2) % n,
   ];
 
+  if (isMobile) {
+    return (
+      <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 pt-2 px-2 w-full hide-scrollbar -mx-2">
+        {shortsList.map((s, idx) => (
+          <motion.div
+            key={idx}
+            className="flex-none w-[65vw] sm:w-[45vw] relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer group shadow-xl border border-white/10 bg-black/40 snap-center"
+            onClick={() => onPlay?.(s.src)}
+            whileTap={{ scale: 0.95 }}
+          >
+            <img src={s.thumb} alt={s.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/90 text-white shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)] backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                <Play className="h-6 w-6 ml-1 fill-current" />
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+              <div className="text-[10px] uppercase tracking-wider text-glow mb-1">{s.label}</div>
+              <div className="text-base font-bold text-white font-display">{s.title}</div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    );
+  }
+
+  // Desktop Fan Carousel
   return (
     <div className="shorts-fan-wrap">
       <div className="shorts-fan">
         {visibleIndices.map((originalIndex, slotIndex) => {
-          const s = shortsData[originalIndex];
-          const offset = slotIndex - 2; // -2, -1, 0, 1, 2
+          const s = shortsList[originalIndex];
+          const offset = slotIndex - 2;
           const isFeatured = offset === 0;
-          const rotate = offset * 12; // slightly more rotation for better fan effect
+          const rotate = offset * 12;
           const z = 5 - Math.abs(offset);
-          const rotateZ = offset * 4; // Fan tilt angle
+          const rotateZ = offset * 4;
 
-          // Array of vibrant colors for the fixed slots to create a perfect static rainbow fan (matching the image)
           const slotColors = [
-            "linear-gradient(135deg, #d900ff, #8b00a5)", // Slot 0: Pink/Magenta
-            "linear-gradient(135deg, #00527c, #002d4d)", // Slot 1: Deep Blue
-            "transparent",                               // Slot 2: Center (Glass)
-            "linear-gradient(135deg, #5a186b, #320c3d)", // Slot 3: Purple
-            "linear-gradient(135deg, #00605a, #003632)", // Slot 4: Teal
+            "linear-gradient(135deg, #d900ff, #8b00a5)", 
+            "linear-gradient(135deg, #00527c, #002d4d)", 
+            "transparent",                               
+            "linear-gradient(135deg, #5a186b, #320c3d)", 
+            "linear-gradient(135deg, #00605a, #003632)", 
           ];
 
           return (
             <motion.div
               key={originalIndex}
-              onClick={() => setActiveIndex(originalIndex)}
+              onClick={() => {
+                if (isFeatured) {
+                  onOpenModal?.(originalIndex);
+                } else {
+                  setActiveIndex(originalIndex);
+                }
+              }}
               className={`shorts-glass group cursor-pointer ${isFeatured ? "is-featured" : ""}`}
               style={{ 
                 background: slotColors[slotIndex],
@@ -79,11 +122,7 @@ export function ShortsCarousel() {
                 rotateY: rotate,
                 rotateZ: rotateZ
               }}
-              transition={{
-                type: "spring",
-                stiffness: 260,
-                damping: 25,
-              }}
+              transition={{ type: "spring", stiffness: 260, damping: 25 }}
             >
               <video
                 src={s.src + "#t=0.1"}
@@ -103,7 +142,11 @@ export function ShortsCarousel() {
               <div className="shorts-glass-overlay" />
 
               {isFeatured && (
-                <div className="shorts-featured-badge">Featured</div>
+                <div className="absolute inset-0 z-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/90 text-white shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)] backdrop-blur-sm transition-transform duration-300 hover:scale-110">
+                    <Play className="h-6 w-6 ml-1 fill-current" />
+                  </div>
+                </div>
               )}
 
               {!isFeatured && (
@@ -123,4 +166,3 @@ export function ShortsCarousel() {
     </div>
   );
 }
-

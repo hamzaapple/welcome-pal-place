@@ -174,27 +174,22 @@ function VideoSection({ id, title, subtitle, icon: Icon, videos, onPlay }: any) 
 function PortfolioPage() {
   const typed = useTypewriter(typewriterWords);
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalIndex, setModalIndex] = useState(0);
-  const [shortsModalOpen, setShortsModalOpen] = useState(false);
-  const [shortsModalIndex, setShortsModalIndex] = useState(0);
+  const [modalSrc, setModalSrc] = useState("");
+  const modalVideoRef = useRef<HTMLVideoElement>(null);
   const [playingIdx, setPlayingIdx] = useState<number | null>(null);
   const featuredRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  const allPortfolioVideos = [...englishVideos, ...arabicVideos, ...carVideos, ...adsVideos];
-
   const openModal = useCallback((src: string) => {
-    const idx = allPortfolioVideos.findIndex(v => v.videoSrc === src);
-    setModalIndex(idx !== -1 ? idx : 0);
+    setModalSrc(src);
     setModalOpen(true);
-  }, [allPortfolioVideos]);
+  }, []);
 
   const closeModal = useCallback(() => {
     setModalOpen(false);
-  }, []);
-
-  const openShortsModal = useCallback((idx: number) => {
-    setShortsModalIndex(idx);
-    setShortsModalOpen(true);
+    if (modalVideoRef.current) {
+      modalVideoRef.current.pause();
+    }
+    setTimeout(() => setModalSrc(""), 400);
   }, []);
 
   // Smooth scroll for anchor links
@@ -346,7 +341,7 @@ function PortfolioPage() {
           </Reveal>
 
           <Reveal>
-            <ShortsCarousel onOpenModal={openShortsModal} />
+            <ShortsCarousel onPlay={openModal} />
           </Reveal>
         </div>
       </section>
@@ -534,19 +529,19 @@ function PortfolioPage() {
       </footer>
 
       {/* ============ VIDEO MODAL ============ */}
-      <VideoModal
-        open={modalOpen}
-        onClose={closeModal}
-        videos={allPortfolioVideos}
-        initialIndex={modalIndex}
-      />
-
-      <VideoModal
-        open={shortsModalOpen}
-        onClose={() => setShortsModalOpen(false)}
-        videos={shortsList.map(s => ({ videoSrc: s.src, title: s.title, desc: s.label }))}
-        initialIndex={shortsModalIndex}
-      />
+      <VideoModal open={modalOpen} onClose={closeModal}>
+        {modalSrc && (
+          <video
+            ref={modalVideoRef}
+            src={modalSrc}
+            controls
+            playsInline
+            autoPlay
+            className="w-[90vw] md:w-auto max-h-[85vh] rounded-2xl"
+            style={{ boxShadow: "0 25px 50px oklch(0 0 0 / 0.5)" }}
+          />
+        )}
+      </VideoModal>
     </div>
   );
 }

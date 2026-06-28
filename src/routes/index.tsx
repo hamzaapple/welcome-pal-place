@@ -364,7 +364,7 @@ function PortfolioPage() {
                   <span>Cars</span>
                 </div>
                 <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">
-                  Car <span className="gradient-text">Editing</span>
+                  Car <span className="gradient-text">Projects</span>
                 </h2>
                 <p className="max-w-md mx-auto md:mx-0 text-muted-foreground">Cinematic automotive videography and editing.</p>
               </Reveal>

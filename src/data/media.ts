@@ -25,9 +25,9 @@ export const englishVideos = [
 ];
 
 export const shortsList = [
-  { label: "Talking Head", title: "Arabic Reel", src: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623258/1_isuz9f.mp4", thumb: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623258/1_isuz9f.jpg" },
-  { label: "Talking Head", title: "English Reel", src: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782620391/2_lpspjq.mp4", thumb: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782620391/2_lpspjq.jpg" },
-  { label: "Commercial", title: "Ads Reel", src: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623477/1_ads_ul2nyk.mp4", thumb: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623477/1_ads_ul2nyk.jpg" },
-  { label: "Talking Head", title: "English Reel 2", src: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782620401/5_ihtxqp.mp4", thumb: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782620401/5_ihtxqp.jpg" },
-  { label: "Automotive", title: "Car Reel", src: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623579/1_ka6qkz.mp4", thumb: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623579/1_ka6qkz.jpg" },
+  { label: "Arabic", title: "Arabic", src: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623258/1_isuz9f.mp4", thumb: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623258/1_isuz9f.jpg" },
+  { label: "English", title: "English", src: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782620391/2_lpspjq.mp4", thumb: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782620391/2_lpspjq.jpg" },
+  { label: "Ads", title: "Ads", src: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623477/1_ads_ul2nyk.mp4", thumb: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623477/1_ads_ul2nyk.jpg" },
+  { label: "English", title: "English", src: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782620401/5_ihtxqp.mp4", thumb: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782620401/5_ihtxqp.jpg" },
+  { label: "Automotive", title: "Automotive", src: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623579/1_ka6qkz.mp4", thumb: "https://res.cloudinary.com/dkwyx6qu7/video/upload/v1782623579/1_ka6qkz.jpg" },
 ];

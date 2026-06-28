@@ -51,9 +51,7 @@ export const Route = createFileRoute("/")(  {
 
 const typewriterWords = [
   "a Video Editor",
-  "a Storyteller",
-  "a Motion Designer",
-  "a Colorist",
+  "a Visual Storyteller",
 ];
 
 function useTypewriter(words: string[], typeSpeed = 90, eraseSpeed = 45, hold = 1500) {
@@ -176,22 +174,20 @@ function VideoSection({ id, title, subtitle, icon: Icon, videos, onPlay }: any) 
 function PortfolioPage() {
   const typed = useTypewriter(typewriterWords);
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalSrc, setModalSrc] = useState("");
-  const modalVideoRef = useRef<HTMLVideoElement>(null);
+  const [modalIndex, setModalIndex] = useState(0);
   const [playingIdx, setPlayingIdx] = useState<number | null>(null);
   const featuredRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
+  const allPortfolioVideos = [...adsVideos, ...carVideos, ...arabicVideos, ...englishVideos];
+
   const openModal = useCallback((src: string) => {
-    setModalSrc(src);
+    const idx = allPortfolioVideos.findIndex(v => v.videoSrc === src);
+    setModalIndex(idx !== -1 ? idx : 0);
     setModalOpen(true);
-  }, []);
+  }, [allPortfolioVideos]);
 
   const closeModal = useCallback(() => {
     setModalOpen(false);
-    if (modalVideoRef.current) {
-      modalVideoRef.current.pause();
-    }
-    setTimeout(() => setModalSrc(""), 400);
   }, []);
 
   // Smooth scroll for anchor links
@@ -248,9 +244,9 @@ function PortfolioPage() {
         <div className="mx-auto w-full max-w-7xl px-6 relative z-10">
           <div className="flex flex-col items-center gap-12 md:flex-row md:gap-20">
             <Reveal className="flex-1 text-center md:text-left">
-              <div className="chip mb-6 font-arabic" dir="rtl">
+              <div className="chip mb-6">
                 <span>🎬</span>
-                <span>صانع محتوى ومونتير فيديو</span>
+                <span>Content Creator & Video Editor</span>
               </div>
               <h1 className="font-display text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl lg:text-7xl">
                 <span className="block text-muted-foreground/80 text-2xl sm:text-3xl md:text-4xl font-medium mb-3">
@@ -267,11 +263,8 @@ function PortfolioPage() {
                 I transform ideas into stunning visual stories — cinematic editing, motion graphics,
                 and color grading that don&apos;t fade with the scroll.
               </p>
-              <p
-                className="mt-3 max-w-lg mx-auto md:mx-0 font-arabic text-sm md:text-base text-muted-foreground/80"
-                dir="rtl"
-              >
-                أحوّل أفكارك إلى قصص بصرية مذهلة تبقى في الذاكرة ✨
+              <p className="mt-3 max-w-lg mx-auto md:mx-0 text-sm md:text-base text-muted-foreground/80">
+                I transform your ideas into stunning visual stories ✨
               </p>
 
               <div className="mt-10 flex flex-wrap items-center justify-center md:justify-start gap-4">
@@ -334,9 +327,9 @@ function PortfolioPage() {
       <section id="shorts" className="relative py-24">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="text-center mb-12">
-            <div className="chip mb-4 font-arabic inline-flex" dir="rtl">
+            <div className="chip mb-4 inline-flex">
               <span>📱</span>
-              <span>ريلز وشورتس</span>
+              <span>Reels & Shorts</span>
             </div>
             <h2 className="font-display text-3xl md:text-5xl font-bold mb-3">
               Short-Form <span className="gradient-text">Content</span>
@@ -615,19 +608,12 @@ function PortfolioPage() {
       </footer>
 
       {/* ============ VIDEO MODAL ============ */}
-      <VideoModal open={modalOpen} onClose={closeModal}>
-        {modalSrc && (
-          <video
-            ref={modalVideoRef}
-            src={modalSrc}
-            controls
-            playsInline
-            autoPlay
-            className="max-w-[92vw] max-h-[88vh] rounded-2xl"
-            style={{ boxShadow: "0 25px 50px oklch(0 0 0 / 0.5)" }}
-          />
-        )}
-      </VideoModal>
+      <VideoModal
+        open={modalOpen}
+        onClose={closeModal}
+        videos={allPortfolioVideos}
+        initialIndex={modalIndex}
+      />
     </div>
   );
 }

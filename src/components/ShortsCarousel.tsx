@@ -133,6 +133,8 @@ export function ShortsCarousel({ onPlay }: Props) {
                 className="shorts-glass-video"
                 ref={(el) => {
                   if (el) {
+                    el.muted = true;
+                    el.defaultMuted = true;
                     if (isFeatured) el.play().catch(() => {});
                     else el.pause();
                   }

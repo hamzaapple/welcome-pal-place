@@ -127,7 +127,7 @@ export function ShortsCarousel({ onPlay }: Props) {
               <video
                 src={s.src + "#t=0.1"}
                 loop
-                muted
+                muted={true}
                 playsInline
                 preload="metadata"
                 className="shorts-glass-video"
@@ -135,6 +135,7 @@ export function ShortsCarousel({ onPlay }: Props) {
                   if (el) {
                     el.muted = true;
                     el.defaultMuted = true;
+                    el.volume = 0;
                     if (isFeatured) el.play().catch(() => {});
                     else el.pause();
                   }

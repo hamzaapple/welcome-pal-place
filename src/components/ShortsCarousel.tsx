@@ -79,8 +79,11 @@ export function ShortsCarousel({ onPlay }: Props) {
             <motion.div
               key={originalIndex}
               onClick={() => {
-                setActiveIndex(originalIndex);
-                onPlay?.(s.src, true);
+                if (isFeatured) {
+                  onPlay?.(s.src, true);
+                } else {
+                  setActiveIndex(originalIndex);
+                }
               }}
               className={`shorts-glass group cursor-pointer ${isFeatured ? "is-featured" : ""}`}
               style={{ 
@@ -121,18 +124,39 @@ export function ShortsCarousel({ onPlay }: Props) {
               }}
               transition={{ type: "spring", stiffness: 260, damping: 25 }}
             >
-              <img 
-                src={s.thumb} 
-                alt={s.title} 
-                className="absolute inset-0 w-full h-full object-cover rounded-2xl" 
-                loading="lazy" 
+              <video
+                src={s.src + "#t=0.1"}
+                loop
+                muted={true}
+                playsInline
+                preload="metadata"
+                className="shorts-glass-video pointer-events-none"
+                ref={(el) => {
+                  if (el) {
+                    el.muted = true;
+                    el.defaultMuted = true;
+                    el.volume = 0;
+                    if (isFeatured) el.play().catch(() => {});
+                    else el.pause();
+                  }
+                }}
               />
 
-              <div className="absolute inset-0 z-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/90 text-white shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)] backdrop-blur-sm transition-transform duration-300 hover:scale-110">
-                  <Play className="h-6 w-6 ml-1 fill-current" />
+              <div className="shorts-glass-overlay" />
+
+              {isFeatured && (
+                <div className="absolute inset-0 z-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/90 text-white shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)] backdrop-blur-sm transition-transform duration-300 hover:scale-110">
+                    <Play className="h-6 w-6 ml-1 fill-current" />
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {!isFeatured && (
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md border border-white/30 text-white px-4 py-2 rounded-full font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-20 whitespace-nowrap shadow-lg">
+                  Click to Focus
+                </div>
+              )}
 
               <div className="shorts-glass-meta">
                 <div className="shorts-glass-label">{s.label}</div>

@@ -175,12 +175,14 @@ function PortfolioPage() {
   const typed = useTypewriter(typewriterWords);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSrc, setModalSrc] = useState("");
+  const [modalMuted, setModalMuted] = useState(false);
   const modalVideoRef = useRef<HTMLVideoElement>(null);
   const [playingIdx, setPlayingIdx] = useState<number | null>(null);
   const featuredRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  const openModal = useCallback((src: string) => {
+  const openModal = useCallback((src: string, isMuted: boolean = false) => {
     setModalSrc(src);
+    setModalMuted(isMuted);
     setModalOpen(true);
   }, []);
 
@@ -352,7 +354,7 @@ function PortfolioPage() {
       <section className="relative py-24">
         <div className="section-divider" />
         <div className="mx-auto max-w-7xl px-6 pt-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-2 gap-6 md:gap-12">
             
             {/* Cars Section Half */}
             <div id="cars" className="scroll-mt-24">
@@ -616,6 +618,7 @@ function PortfolioPage() {
             controls
             playsInline
             autoPlay
+            muted={modalMuted}
             className="w-[90vw] md:w-auto max-h-[85vh] rounded-2xl"
             style={{ boxShadow: "0 25px 50px oklch(0 0 0 / 0.5)" }}
           />

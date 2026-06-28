@@ -35,7 +35,7 @@ export function ShortsCarousel({ onPlay }: Props) {
           <motion.div
             key={idx}
             className="flex-none w-[65vw] sm:w-[45vw] relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer group shadow-xl border border-white/10 bg-black/40 snap-center"
-            onClick={() => onPlay?.(s.src)}
+            onClick={() => onPlay?.(s.src, true)}
             whileTap={{ scale: 0.95 }}
           >
             <img src={s.thumb} alt={s.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
@@ -80,7 +80,7 @@ export function ShortsCarousel({ onPlay }: Props) {
               key={originalIndex}
               onClick={() => {
                 if (isFeatured) {
-                  onOpenModal?.(originalIndex);
+                  onPlay?.(s.src, true);
                 } else {
                   setActiveIndex(originalIndex);
                 }

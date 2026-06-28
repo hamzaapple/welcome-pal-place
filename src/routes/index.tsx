@@ -123,7 +123,7 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
   );
 }
 
-import { adsVideos, arabicVideos, carVideos, englishVideos } from "@/data/media";
+import { adsVideos, arabicVideos, carVideos, englishVideos, shortsList } from "@/data/media";
 
 function VideoSection({ id, title, subtitle, icon: Icon, videos, onPlay }: any) {
   return (
@@ -175,6 +175,8 @@ function PortfolioPage() {
   const typed = useTypewriter(typewriterWords);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalIndex, setModalIndex] = useState(0);
+  const [shortsModalOpen, setShortsModalOpen] = useState(false);
+  const [shortsModalIndex, setShortsModalIndex] = useState(0);
   const [playingIdx, setPlayingIdx] = useState<number | null>(null);
   const featuredRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
@@ -188,6 +190,11 @@ function PortfolioPage() {
 
   const closeModal = useCallback(() => {
     setModalOpen(false);
+  }, []);
+
+  const openShortsModal = useCallback((idx: number) => {
+    setShortsModalIndex(idx);
+    setShortsModalOpen(true);
   }, []);
 
   // Smooth scroll for anchor links
@@ -340,7 +347,7 @@ function PortfolioPage() {
           </Reveal>
 
           <Reveal>
-            <ShortsCarousel />
+            <ShortsCarousel onOpenModal={openShortsModal} />
           </Reveal>
         </div>
       </section>
@@ -613,6 +620,13 @@ function PortfolioPage() {
         onClose={closeModal}
         videos={allPortfolioVideos}
         initialIndex={modalIndex}
+      />
+
+      <VideoModal
+        open={shortsModalOpen}
+        onClose={() => setShortsModalOpen(false)}
+        videos={shortsList.map(s => ({ videoSrc: s.src, title: s.title, desc: s.label }))}
+        initialIndex={shortsModalIndex}
       />
     </div>
   );

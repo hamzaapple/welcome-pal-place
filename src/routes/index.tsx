@@ -348,8 +348,87 @@ function PortfolioPage() {
 
       <VideoSection id="english" title="English" subtitle="Professional English voiceovers and content." icon={Youtube} videos={englishVideos} onPlay={openModal} />
       <VideoSection id="arabic" title="Arabic" subtitle="Content crafted for Arabic-speaking audiences." icon={Sparkles} videos={arabicVideos} onPlay={openModal} />
-      <VideoSection id="cars" title="Car" subtitle="Cinematic automotive videography and editing." icon={Play} videos={carVideos} onPlay={openModal} />
-      <VideoSection id="ads" title="Ads" subtitle="Commercial and brand video editing." icon={Zap} videos={adsVideos} onPlay={openModal} />
+
+      <section className="relative py-24">
+        <div className="section-divider" />
+        <div className="mx-auto max-w-7xl px-6 pt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            
+            {/* Cars Section Half */}
+            <div id="cars" className="scroll-mt-24">
+              <Reveal className="text-center md:text-left mb-10">
+                <div className="chip mb-4 inline-flex">
+                  <Play className="h-3.5 w-3.5" />
+                  <span>Cars</span>
+                </div>
+                <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">
+                  Car <span className="gradient-text">Editing</span>
+                </h2>
+                <p className="max-w-md mx-auto md:mx-0 text-muted-foreground">Cinematic automotive videography and editing.</p>
+              </Reveal>
+              <div className="grid grid-cols-1 gap-7">
+                {carVideos.map((v: any, i: number) => (
+                  <Reveal key={`car-${i}`} delay={i * 80}>
+                    <div onClick={() => openModal(v.videoSrc)} className="glass-card video-card block overflow-hidden cursor-pointer">
+                      <div className="relative aspect-video overflow-hidden">
+                        <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted playsInline />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                        <div className="play-overlay">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
+                            <Play className="h-5 w-5 fill-current text-primary-foreground" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-5">
+                        <div className="text-[11px] uppercase tracking-widest text-glow mb-2">{v.tag}</div>
+                        <h3 className="font-display text-lg font-semibold mb-1.5">{v.title}</h3>
+                        <p className="text-sm text-muted-foreground">{v.desc}</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+
+            {/* Ads Section Half */}
+            <div id="ads" className="scroll-mt-24">
+              <Reveal className="text-center md:text-left mb-10">
+                <div className="chip mb-4 inline-flex">
+                  <Zap className="h-3.5 w-3.5" />
+                  <span>Ads</span>
+                </div>
+                <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">
+                  Ads <span className="gradient-text">Projects</span>
+                </h2>
+                <p className="max-w-md mx-auto md:mx-0 text-muted-foreground">Commercial and brand video editing.</p>
+              </Reveal>
+              <div className="grid grid-cols-1 gap-7">
+                {adsVideos.map((v: any, i: number) => (
+                  <Reveal key={`ads-${i}`} delay={i * 80}>
+                    <div onClick={() => openModal(v.videoSrc)} className="glass-card video-card block overflow-hidden cursor-pointer">
+                      <div className="relative aspect-video overflow-hidden">
+                        <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted playsInline />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                        <div className="play-overlay">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
+                            <Play className="h-5 w-5 fill-current text-primary-foreground" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-5">
+                        <div className="text-[11px] uppercase tracking-widest text-glow mb-2">{v.tag}</div>
+                        <h3 className="font-display text-lg font-semibold mb-1.5">{v.title}</h3>
+                        <p className="text-sm text-muted-foreground">{v.desc}</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
 
       {/* ============ CONTACT ============ */}
       <section id="contact" className="relative py-24">

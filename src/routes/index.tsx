@@ -149,7 +149,7 @@ function VideoSection({ id, title, subtitle, icon: Icon, videos, onPlay }: any) 
                 className="glass-card video-card block overflow-hidden cursor-pointer"
               >
                 <div className="relative aspect-video overflow-hidden">
-                  <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted playsInline />
+                  <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted={true} playsInline />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                   <div className="play-overlay">
                     <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
@@ -373,7 +373,7 @@ function PortfolioPage() {
                   <Reveal key={`car-${i}`} delay={i * 80}>
                     <div onClick={() => openModal(v.videoSrc)} className="glass-card video-card block overflow-hidden cursor-pointer">
                       <div className="relative aspect-video overflow-hidden">
-                        <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted playsInline />
+                        <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted={true} playsInline />
                         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                         <div className="play-overlay">
                           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
@@ -409,7 +409,7 @@ function PortfolioPage() {
                   <Reveal key={`ads-${i}`} delay={i * 80}>
                     <div onClick={() => openModal(v.videoSrc)} className="glass-card video-card block overflow-hidden cursor-pointer">
                       <div className="relative aspect-video overflow-hidden">
-                        <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted playsInline />
+                        <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted={true} playsInline />
                         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                         <div className="play-overlay">
                           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">

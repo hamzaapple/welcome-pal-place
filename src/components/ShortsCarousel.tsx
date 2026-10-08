@@ -1,16 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Play } from "lucide-react";
 import { motion } from "motion/react";
 import { shortsList } from "@/data/media";
 
+const SLOT_COUNT = 5;
+const CENTER_SLOT = 2;
+
 type Props = {
-  onPlay?: (src: string) => void;
+  onPlay?: (src: string, isMuted?: boolean) => void;
 };
 
 export function ShortsCarousel({ onPlay }: Props) {
   const [activeIndex, setActiveIndex] = useState(2);
   const [isMobile, setIsMobile] = useState(false);
   const n = shortsList.length;
+  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
+  const prevOffsets = useRef<Record<number, number>>({});
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -20,13 +25,28 @@ export function ShortsCarousel({ onPlay }: Props) {
   }, []);
 
   // For Desktop Fan
-  const visibleIndices = [
-    (activeIndex - 2 + n) % n,
-    (activeIndex - 1 + n) % n,
-    activeIndex,
-    (activeIndex + 1) % n,
-    (activeIndex + 2) % n,
-  ];
+  const visibleIndices = Array.from(
+    { length: SLOT_COUNT },
+    (_, slot) => (activeIndex + slot - CENTER_SLOT + n) % n,
+  );
+
+  // الفيديو اللي في النص بس هو اللي بيشتغل — في effect مش في ref callback
+  // عشان ميتناديش play/pause مع كل render
+  useEffect(() => {
+    if (isMobile) return;
+    for (const [key, el] of Object.entries(videoRefs.current)) {
+      if (!el) continue;
+      if (Number(key) === activeIndex) el.play().catch(() => {});
+      else el.pause();
+    }
+  }, [activeIndex, isMobile]);
+
+  // بنسجّل مكان كل كارت بعد كل تحديث عشان نعرف مين اللي "لفّ" حوالين الفان
+  useEffect(() => {
+    visibleIndices.forEach((originalIndex, slot) => {
+      prevOffsets.current[originalIndex] = slot - CENTER_SLOT;
+    });
+  });
 
   if (isMobile) {
     return (
@@ -61,18 +81,24 @@ export function ShortsCarousel({ onPlay }: Props) {
       <div className="shorts-fan">
         {visibleIndices.map((originalIndex, slotIndex) => {
           const s = shortsList[originalIndex];
-          const offset = slotIndex - 2;
+          const offset = slotIndex - CENTER_SLOT;
           const isFeatured = offset === 0;
+
+          // الكارت اللي بيلف من آخر الفان للناحية التانية بينط على طول
+          // بدل ما يطير عبر الشاشة كلها
+          const prevOffset = prevOffsets.current[originalIndex];
+          const wrapped = prevOffset !== undefined && Math.abs(offset - prevOffset) > 1;
           const rotate = offset * 12;
           const z = 5 - Math.abs(offset);
           const rotateZ = offset * 4;
 
+          // خلفية بتبان وقت تحميل الفيديو — بتدرجات على نفس palette الموقع
           const slotColors = [
-            "linear-gradient(135deg, #d900ff, #8b00a5)", 
-            "linear-gradient(135deg, #00527c, #002d4d)", 
-            "transparent",                               
-            "linear-gradient(135deg, #5a186b, #320c3d)", 
-            "linear-gradient(135deg, #00605a, #003632)", 
+            "linear-gradient(135deg, oklch(0.3 0.12 280), oklch(0.18 0.06 280))",
+            "linear-gradient(135deg, oklch(0.32 0.13 250), oklch(0.19 0.06 250))",
+            "linear-gradient(135deg, oklch(0.34 0.14 240), oklch(0.2 0.07 240))",
+            "linear-gradient(135deg, oklch(0.32 0.13 235), oklch(0.19 0.06 235))",
+            "linear-gradient(135deg, oklch(0.3 0.12 220), oklch(0.18 0.06 220))",
           ];
 
           return (
@@ -122,7 +148,9 @@ export function ShortsCarousel({ onPlay }: Props) {
                 rotateY: rotate,
                 rotateZ: rotateZ
               }}
-              transition={{ type: "spring", stiffness: 260, damping: 25 }}
+              transition={
+                wrapped ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 25 }
+              }
             >
               <video
                 src={s.src + "#t=0.1"}
@@ -132,12 +160,11 @@ export function ShortsCarousel({ onPlay }: Props) {
                 preload="metadata"
                 className="shorts-glass-video pointer-events-none"
                 ref={(el) => {
+                  videoRefs.current[originalIndex] = el;
                   if (el) {
                     el.muted = true;
                     el.defaultMuted = true;
                     el.volume = 0;
-                    if (isFeatured) el.play().catch(() => {});
-                    else el.pause();
                   }
                 }}
               />

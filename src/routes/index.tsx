@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, useRef, useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import {
   Play,
   Pause,
@@ -19,9 +20,18 @@ import {
   Rocket,
   Facebook,
   Link as LinkIcon,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 import { Reveal } from "@/components/Reveal";
+import { ArcMarquee } from "@/components/ArcMarquee";
+import { ServicesSection } from "@/components/ServicesCarousel";
+import { AboutSection } from "@/components/AboutSection";
+import { LongFormSection } from "@/components/LongFormSection";
+import { PartnersSection } from "@/components/PartnersSection";
+import { FeaturedClientsSection } from "@/components/FeaturedClientsSection";
+import { WhatsAppReviewsSection } from "@/components/WhatsAppReviews";
 import { ShortsCarousel } from "@/components/ShortsCarousel";
 import { ParticleCanvas } from "@/components/ParticleCanvas";
 import { CursorGlow } from "@/components/CursorGlow";
@@ -126,10 +136,24 @@ function Counter({ target, suffix = "" }: { target: number; suffix?: string }) {
 import { adsVideos, arabicVideos, carVideos, englishVideos, shortsList } from "@/data/media";
 
 function VideoSection({ id, title, subtitle, icon: Icon, videos, onPlay }: any) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    align: "start", 
+    dragFree: true,
+    containScroll: "trimSnaps"
+  });
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
   return (
     <section id={id} className="relative py-24">
       <div className="section-divider" />
-      <div className="mx-auto max-w-7xl px-6 pt-12">
+      <div className="mx-auto max-w-[85rem] px-6 pt-12">
         <Reveal className="text-center mb-14">
           <div className="chip mb-4 inline-flex">
             <Icon className="h-3.5 w-3.5" />
@@ -141,30 +165,48 @@ function VideoSection({ id, title, subtitle, icon: Icon, videos, onPlay }: any) 
           <p className="max-w-xl mx-auto text-muted-foreground">{subtitle}</p>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-          {videos.map((v: any, i: number) => (
-            <Reveal key={i} delay={i * 80}>
-              <div
-                onClick={() => onPlay(v.videoSrc)}
-                className="glass-card video-card block overflow-hidden cursor-pointer"
-              >
-                <div className="relative aspect-video overflow-hidden">
-                  <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted={true} playsInline />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-                  <div className="play-overlay">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
-                      <Play className="h-5 w-5 fill-current text-primary-foreground" />
+        <div className="relative group">
+          <button 
+            onClick={scrollPrev} 
+            className="absolute -left-3 md:-left-6 top-[40%] -translate-y-1/2 z-20 hidden md:flex h-12 w-12 items-center justify-center rounded-full bg-background/90 border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.8)] text-white hover:bg-white/10 transition-all hover:scale-110 opacity-0 group-hover:opacity-100 focus:outline-none"
+          >
+            <ChevronLeft className="h-6 w-6 -ml-1" />
+          </button>
+          
+          <button 
+            onClick={scrollNext} 
+            className="absolute -right-3 md:-right-6 top-[40%] -translate-y-1/2 z-20 hidden md:flex h-12 w-12 items-center justify-center rounded-full bg-background/90 border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.8)] text-white hover:bg-white/10 transition-all hover:scale-110 opacity-0 group-hover:opacity-100 focus:outline-none"
+          >
+            <ChevronRight className="h-6 w-6 ml-1" />
+          </button>
+
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex gap-6 pb-8 touch-pan-y" style={{ backfaceVisibility: "hidden" }}>
+              {videos.map((v: any, i: number) => (
+                <Reveal key={i} delay={i * 80} className="flex-[0_0_auto] min-w-0 w-[85vw] sm:w-[45vw] md:w-[31%] max-w-[320px]">
+                  <div
+                    onClick={() => onPlay(v.videoSrc)}
+                    className="glass-card video-card block overflow-hidden cursor-pointer h-full"
+                  >
+                    <div className="relative aspect-[9/16] overflow-hidden">
+                      <img src={v.thumb} alt={v.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                      <div className="play-overlay">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
+                          <Play className="h-5 w-5 fill-current text-primary-foreground" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-5">
+                      <div className="text-[11px] uppercase tracking-widest text-glow mb-2">{v.tag}</div>
+                      <h3 className="font-display text-lg font-semibold mb-1.5">{v.title}</h3>
+                      <p className="text-sm text-muted-foreground">{v.desc}</p>
                     </div>
                   </div>
-                </div>
-                <div className="p-5">
-                  <div className="text-[11px] uppercase tracking-widest text-glow mb-2">{v.tag}</div>
-                  <h3 className="font-display text-lg font-semibold mb-1.5">{v.title}</h3>
-                  <p className="text-sm text-muted-foreground">{v.desc}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+                </Reveal>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -238,10 +280,13 @@ function PortfolioPage() {
       <BackToTop />
       <Navbar />
 
+      {/* ============ ARC MARQUEE ============ */}
+      <ArcMarquee className="relative z-10 pt-20 md:pt-24" />
+
       {/* ============ HERO ============ */}
       <section
         id="hero"
-        className="relative flex min-h-screen items-center pt-28 pb-20"
+        className="relative flex min-h-[calc(100vh-176px)] items-center pt-2 pb-20 md:min-h-[calc(100vh-260px)]"
       >
         <ParticleCanvas />
 
@@ -326,6 +371,15 @@ function PortfolioPage() {
         </a>
       </section>
 
+      {/* ============ SERVICES ============ */}
+      <ServicesSection />
+
+      {/* ============ ABOUT ============ */}
+      <AboutSection />
+
+      {/* ============ LONG FORM ============ */}
+      <LongFormSection />
+
       {/* ============ SHORTS ============ */}
       <section id="shorts" className="relative py-24">
         <div className="mx-auto max-w-7xl px-6">
@@ -368,12 +422,12 @@ function PortfolioPage() {
                 </h2>
                 <p className="max-w-md mx-auto md:mx-0 text-muted-foreground">Cinematic automotive videography and editing.</p>
               </Reveal>
-              <div className="grid grid-cols-1 gap-7">
+              <div className="grid grid-cols-1 gap-7 max-w-[280px] mx-auto md:mx-0">
                 {carVideos.map((v: any, i: number) => (
                   <Reveal key={`car-${i}`} delay={i * 80}>
                     <div onClick={() => openModal(v.videoSrc)} className="glass-card video-card block overflow-hidden cursor-pointer">
-                      <div className="relative aspect-video overflow-hidden">
-                        <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted={true} playsInline />
+                      <div className="relative aspect-[9/16] overflow-hidden">
+                        <img src={v.thumb} alt={v.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" />
                         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                         <div className="play-overlay">
                           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
@@ -404,12 +458,12 @@ function PortfolioPage() {
                 </h2>
                 <p className="max-w-md mx-auto md:mx-0 text-muted-foreground">Commercial and brand video editing.</p>
               </Reveal>
-              <div className="grid grid-cols-1 gap-7">
+              <div className="grid grid-cols-1 gap-7 max-w-[280px] mx-auto md:mx-0">
                 {adsVideos.map((v: any, i: number) => (
                   <Reveal key={`ads-${i}`} delay={i * 80}>
                     <div onClick={() => openModal(v.videoSrc)} className="glass-card video-card block overflow-hidden cursor-pointer">
-                      <div className="relative aspect-video overflow-hidden">
-                        <video src={v.videoSrc + "#t=0.1"} className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" preload="metadata" muted={true} playsInline />
+                      <div className="relative aspect-[9/16] overflow-hidden">
+                        <img src={v.thumb} alt={v.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 hover:scale-110" />
                         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                         <div className="play-overlay">
                           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary shadow-[0_0_30px_oklch(0.68_0.21_250/0.6)]">
@@ -431,6 +485,15 @@ function PortfolioPage() {
           </div>
         </div>
       </section>
+
+      {/* ============ FEATURED CLIENTS ============ */}
+      <FeaturedClientsSection />
+
+      {/* ============ PARTNERS ============ */}
+      <PartnersSection />
+
+      {/* ============ CLIENTS ============ */}
+      <WhatsAppReviewsSection />
 
       {/* ============ CONTACT ============ */}
       <section id="contact" className="relative py-24">
@@ -598,6 +661,7 @@ function PortfolioPage() {
       <VideoModal open={modalOpen} onClose={closeModal}>
         {modalSrc && (
           <video
+            key={modalSrc}
             ref={modalVideoRef}
             src={modalSrc}
             controls
@@ -626,11 +690,16 @@ function Navbar() {
 
   const links = [
     { href: "#hero", label: "Home" },
+    { href: "#services", label: "Services" },
+    { href: "#about", label: "About" },
+    { href: "#longform", label: "Long Form" },
     { href: "#shorts", label: "Reels" },
     { href: "#english", label: "English" },
     { href: "#arabic", label: "Arabic" },
     { href: "#cars", label: "Cars" },
     { href: "#ads", label: "Ads" },
+    { href: "#partners", label: "Partners" },
+    { href: "#clients", label: "Clients" },
   ];
 
   return (
@@ -645,25 +714,25 @@ function Navbar() {
         <a href="#hero" className="flex items-center gap-2">
           <span className="font-display text-xl font-bold gradient-text">Nady Rabie</span>
         </a>
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-5">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="whitespace-nowrap text-[13px] text-muted-foreground transition-colors hover:text-foreground"
             >
               {l.label}
             </a>
           ))}
         </div>
-        <a href="#contact" className="hidden md:inline-flex btn-glow !py-2 !px-5 !text-sm">
+        <a href="#contact" className="hidden lg:inline-flex btn-glow !py-2 !px-5 !text-sm">
           Contact
         </a>
         <button
           type="button"
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="lg:hidden flex flex-col gap-1.5 p-2"
         >
           <span
             className={`block h-0.5 w-6 bg-foreground transition-transform ${
@@ -683,7 +752,7 @@ function Navbar() {
         </button>
       </div>
       {open && (
-        <div className="md:hidden mt-3 mx-6 rounded-2xl glass-card p-4 flex flex-col gap-2">
+        <div className="lg:hidden mt-3 mx-6 rounded-2xl glass-card p-4 flex flex-col gap-2 max-h-[70vh] overflow-y-auto">
           {[...links, { href: "#contact", label: "Contact" }].map((l) => (
             <a
               key={l.href}
